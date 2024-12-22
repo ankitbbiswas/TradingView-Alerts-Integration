@@ -1,3 +1,6 @@
+Content:
+markdown
+Copy code
 # TradingView Alerts Integration
 
 This repository demonstrates how to create a simple **Moving Average Crossover strategy** in TradingView using Pine Script, send alerts (Buy/Sell signals), and optionally process them using a Python server.
@@ -39,3 +42,19 @@ This repository demonstrates how to create a simple **Moving Average Crossover s
 1. Navigate to the `python-server` directory:
    ```bash
    cd python-server
+Install dependencies:
+bash
+Copy code
+pip install -r requirements.txt
+Run the server:
+bash
+Copy code
+python webhook_server.py
+The server will listen on http://127.0.0.1:5000/receive-alert.
+3. Testing the Integration
+Use a tool like Postman or curl to send test alerts to the Python server:
+bash
+Copy code
+curl -X POST http://127.0.0.1:5000/receive-alert \
+-H "Content-Type: application/json" \
+-d '{"symbol": "AAPL", "price": 150.25, "time": "2024-12-22T10:30:00Z"}'
