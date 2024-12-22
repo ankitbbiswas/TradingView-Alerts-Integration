@@ -1,0 +1,5 @@
+Python 3.7+
+Flask
+TradingView Account (Basic or Premium)
+
+Flask==2.2.3
