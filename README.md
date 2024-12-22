@@ -51,10 +51,9 @@ bash
 Copy code
 python webhook_server.py
 The server will listen on http://127.0.0.1:5000/receive-alert.
+
 3. Testing the Integration
-Use a tool like Postman or curl to send test alerts to the Python server:
-bash
-Copy code
+Use a tool like Postman or curl to send test alerts to the Python server
 curl -X POST http://127.0.0.1:5000/receive-alert \
 -H "Content-Type: application/json" \
 -d '{"symbol": "AAPL", "price": 150.25, "time": "2024-12-22T10:30:00Z"}'
