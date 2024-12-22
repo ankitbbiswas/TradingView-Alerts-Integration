@@ -1,0 +1,26 @@
+//@version=5
+indicator("Moving Average Crossover with External URL Notification", overlay=true)
+
+// Define Moving Average lengths
+fastLength = input.int(9, title="Fast MA Length")
+slowLength = input.int(21, title="Slow MA Length")
+
+// Calculate Moving Averages
+fastMA = ta.sma(close, fastLength)
+slowMA = ta.sma(close, slowLength)
+
+// Plot the Moving Averages
+plot(fastMA, color=color.blue, title="Fast MA", linewidth=2)
+plot(slowMA, color=color.red, title="Slow MA", linewidth=2)
+
+// Buy and Sell Signals
+longSignal = ta.crossover(fastMA, slowMA)
+shortSignal = ta.crossunder(fastMA, slowMA)
+
+// Plot Buy and Sell markers
+plotshape(longSignal, style=shape.labelup, location=location.belowbar, color=color.green, size=size.small, title="Buy Signal", text="BUY")
+plotshape(shortSignal, style=shape.labeldown, location=location.abovebar, color=color.red, size=size.small, title="Sell Signal", text="SELL")
+
+// Generate Alert Conditions
+alertcondition(longSignal, title="Buy Signal Alert", message='{"signal": "BUY", "symbol": "{{ticker}}", "price": "{{close}}", "time": "{{time}}"}')
+alertcondition(shortSignal, title="Sell Signal Alert", message='{"signal": "SELL", "symbol": "{{ticker}}", "price": "{{close}}", "time": "{{time}}"}')
